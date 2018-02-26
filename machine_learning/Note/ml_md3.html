@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MachineLearning3</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Machine Learning API</h1>
+<p>@Author hehaoxing</p>
+<h3>1.模型融合</h3>
+<pre><code>简单的信条：
+    1.群众的力量是伟大的，集体智慧是惊人的：
+        Bagging
+        随机森林/Random forest
+    2.站在巨人的肩膀上，能看得更远：
+        模型stacking
+    3.一万小时定律
+        Adaboost
+        逐步增强树/Gradient Boosting Tree
+
+Bagging：
+    一种弱依赖性算法，并行效率高，主要关注降低方差，
+    (1) 用一个算法：
+        不用全部的数据集，每次取一个子集训练一个模型。
+        分类：用这些模型的结果做vote
+        回归：用这些模型的结果取平均
+    (2) 用不同的算法：
+        用这些模型的结果做vote或求平均
+
+Stacking：
+    用多种predictor结果作为特征训练：
+        即使用分类器对数据进行训练，然后以结果作为输入再进行训练。
+
+Boosting：
+    一种强依赖性算法，串形运行，主要关注降低偏差。
+    Adaboost：
+        (1) 重复迭代和训练
+        (2) 每次分配给分错的样本更高的权重
+        (3) 最简单的分类器叠加
+
+    Gradient Boosting Tree：
+        (1) 简单模型进行拟合。
+        (2) 样本和拟合曲线求差值，得到差错集合。
+        (3) 拟合差错集合，与之间的曲线进行叠加。
+        (4) 重复进行以上过程，直到训练完成。
+</code></pre>
+
+<h3>2.模型融合实例</h3>
+<p>1.投票器</p>
+<pre><code>from sklearn.ensemble import VotingClassifier
+参数：
+    estimators : list of (string, estimator) tuples
+        估计器的元祖或列表，这些原始的估计器将被存储在类属性self.estimators_中
+    voting ： str, {'hard', 'soft'}(default ='hard')
+        如果取'hard'，即服从多数票。
+        如果取'soft'，即加权平均概率。
+    weights : array-like, shape = [n_classifiers], optional (default=`None`)
+        用于voting参数。如果无，则使用均匀权重。
+    n_jobs : int, optional (default=1)
+        fit的并行任务数。
+</code></pre>
+
+<p>2.Bagging分类与Bagging回归</p>
+<pre><code>sklearn.ensemble.BaggingClassifier
+sklearn.ensemble.BaggingClassifier(base_estimator=None, n_estimators=10, max_samples=1.0, 
+                                    max_features=1.0, bootstrap=True, bootstrap_features=False, 
+                                    oob_score=False, warm_start=False, n_jobs=1,
+                                    random_state=None, verbose=0)
+参数：
+    base_estimator：
+        只给一个基分类器。None指决策树。
+    oob_score : bool
+        Whether to use out-of-bag samples to estimate the generalization error.
+    max_samples/max_features：
+        整数为数目，浮点为比例。
+Bagging是一种组合基本分类器的方法，也就是使用多个基分类器来获取更为强大的分类器，其核心思想是有放回的抽样。
+Bagging算法的训练流程：
+    1、从样本集中有放回的抽样M个样本。
+    2、用这M个样本训练基分类器C。
+    3、重复这个过程X次，得到若干个基分类器。
+Bagging算法的预测流程：
+    1、对于新传入实例A，用这X个新分类器得到一个分类结果的列表。
+    2、若待分类属性是数值型（回归），求这个列表的算数平均值作为结果返回。
+    3、若待分类属性是枚举类型（分类），按这个列表对分类结果进行投票，返回票数最高的。
+</code></pre>
+
+<p>3.随机森林</p>
+<pre><code>sklearn.ensemble.RandomForestClassifier(n_estimators=10, criterion='gini', max_depth=None,
+    min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto',
+    max_leaf_nodes=None, min_impurity_split=1e-07, bootstrap=True, oob_score=False, n_jobs=1,
+    random_state=None, verbose=0, warm_start=False, class_weight=None)
+
+随机森林就是由多棵CART（Classification And Regression Tree）构成的。
+对于(每棵树)，它们使用的(训练集)是从总的训练集中(有放回采样)出来的，
+这意味着，总的训练集中的有些样本可能多次出现在一棵树的训练集中，也可能从未出现在一棵树的训练集中。
+在训练每棵树的(节点)时，使用的(特征)是从所有特征中(按照一定比例)(随机地无放回的抽取)的。
+</code></pre>
+
+<p>4.Boosting类算法：Adaboost与GBDT</p>
+<p><a href="http://blog.csdn.net/han_xiaoyang/article/details/52665396">xgboost detail</a></p>
+<pre><code>1. sklearn库:
+    sklearn.ensemble.AdaBoostClassifier
+    sklearn.ensemble.GradientBoostingClassifier
+    一般GBDT使用较多，且大家一般不使用sklearn(太慢了)，而使用xgboost或者lightGBM。
+2. xgboost：
+    1) Demo：
+    import xgboost as xgb
+    # 数据读取
+    dtrain = xgb.DMatrix('demo/data/agaricus.txt.train')
+    dtest = xgb.DMatrix('demo/data/agaricus.txt.test')
+    # 参数map
+    param = {'max_depth':2, 'eta':1, 'silent':1, 'objective':'binary:logistic' }
+    num_round = 2
+    bst = xgb.train(param, dtrain, num_round)
+    # 预测
+    preds = bst.predict(dtest)
+    2)API
+    import xgboost as xgb
+    核心数据:
+        class xgboost.DMatrix(data, label=None, missing=None, weight=None, silent=False, feature_names=None, 
+        feature_types=None)
+    Learing api：
+        xgboost.train(params, dtrain, num_boost_round=10, evals=(), obj=None, feval=None, maximize=False, 
+        early_stopping_rounds=None, evals_result=None, verbose_eval=True, xgb_model=None, callbacks=None, 
+        learning_rates=None)
+        参数：
+            params (dict) – 变量
+            dtrain (DMatrix) – 训练数据
+            num_boost_round (int) – 迭代次数
+            evals (list of pairs (DMatrix, string)) – 训练时可用的集合，一般用于用户(观察)验证集数据效果。
+                eg： watchlist  = [(dtest,'eval'), (dtrain,'train')]
+            early_stopping_rounds - 早停剪枝
+                防止过拟合，避免拟合噪声。
+        ***params：
+            通用参数：宏观函数控制。
+                1、booster[默认gbtree]
+                    选择每次迭代的模型，有两种选择： 
+                        gbtree：基于树的模型 
+                        gbliner：线性模型
+                2、silent[默认0]
+                    当这个参数值为1时，静默模式开启，不会输出任何信息。
+                    一般这个参数就保持默认的0，因为这样能帮我们更好地理解模型。
+                3、nthread[默认值为最大可能的线程数]
+            Booster参数：控制每一步的booster(tree/regression)，这里只讲tree：
+                1、eta[默认0.3]
+                    和GBM中的 learning rate 参数类似。
+                    通过减少每一步的权重，可以提高模型的鲁棒性。
+                    典型值为0.01-0.2。
+                2、max_depth[默认6]
+                    和GBM中的参数相同，这个值为树的最大深度。
+                    这个值也是用来避免过拟合的。
+            学习目标参数：控制训练目标的表现：
+                1、objective[默认reg:linear]：
+                    这个参数定义需要被最小化的损失函数。最常用的值有： 
+                        binary:logistic 二分类的逻辑回归，返回预测的概率(不是类别)。
+                        multi:softmax 使用softmax的多分类器，返回预测的类别(不是概率)。 
+                        在这种情况下，你还需要多设一个参数：num_class(类别数目)。
+                        multi:softprob 和multi:softmax参数一样，但是返回的是每个数据属于各个类别的概率。
+                    2、eval_metric[默认值取决于objective参数的取值]
+                        对于有效数据的度量方法。
+                        对于回归问题，默认值是rmse，对于分类问题，默认值是error。
+                        典型值有： 
+                        rmse 均方根误差
+                        mae 平均绝对误差
+                        logloss 负对数似然函数值
+                        error 二分类错误率(阈值为0.5)
+                        merror 多分类错误率
+                        mlogloss 多分类logloss损失函数
+                        auc 曲线下面积
+                    3、seed(默认0) 
+                        随机数的种子
+                        设置它可以复现随机数据的结果，也可以用于调整参数
+            交叉验证：
+                xgboost.cv(params, dtrain, num_boost_round=10, nfold=3, stratified=False, folds=None, 
+                metrics=(), obj=None, feval=None, maximize=False, early_stopping_rounds=None, fpreproc=None, 
+                as_pandas=True, verbose_eval=None, show_stdv=True, seed=0, callbacks=None, shuffle=True)
+            参数：
+                num_boost_round (int) – Number of boosting iterations.
+                nfold (int) – Number of folds in CV. #交叉折数
+                obj (function) – Custom objective function. #自定义目标函数
+                feval (function) – Custom evaluation function. #自定义评估函数 
+    3)Scikit-Learn API：
+        from xgboost.sklearn import XGBClassifier
+            class xgboost.XGBRegressor(max_depth=3, learning_rate=0.1, n_estimators=100, silent=True, 
+            objective='reg:linear', nthread=-1, gamma=0, min_child_weight=1, max_delta_step=0, subsample=1, 
+            colsample_bytree=1, colsample_bylevel=1, reg_alpha=0, reg_lambda=1, scale_pos_weight=1,
+            base_score=0.5, seed=0, missing=None)
+
+            class xgboost.XGBClassifier(max_depth=3, learning_rate=0.1, n_estimators=100, silent=True, 
+            objective='binary:logistic', nthread=-1, gamma=0, min_child_weight=1, max_delta_step=0, 
+            subsample=1, colsample_bytree=1, colsample_bylevel=1, reg_alpha=0, reg_lambda=1, 
+            scale_pos_weight=1, base_score=0.5, seed=0, missing=None)
+
+        function：
+            fit(X, y, sample_weight=None, eval_set=None, eval_metric=None, early_stopping_rounds=None,
+            verbose=True)
+                Fit gradient boosting classifier
+            注：fit可直接使用DataFrame作为输入，而xgb库中必须使用DMatrix作为数据集。
+            evals_result()
+                Return the evaluation results.
+            predict([])
+                sklearn的许多方法均可以使用，包括交叉验证与网格搜索。
+        详细内容请查看API解决。
+
+3. lightGBM
+</code></pre>
+
+<p>API：<a href="LightGBM.html">lightGBMAPI</a></p>
+<pre><code>    另一种用于模型融合的包，相比于xgboost更快，且准确率更高。    
+    包含sklearn API与非sklearn API，这里主要在使用sklearn API。
+    Demo：
+        import lightgbm as lgb
+        import pandas as pd
+        from sklearn.metrics import mean_squared_error
+        from sklearn.model_selection import GridSearchCV
+        # 用pandas载入数据集
+        print('Load data...')
+        df_train = pd.read_csv('data/regression.train', header=None, sep='\t')
+        df_test = pd.read_csv('data/regression.test', header=None, sep='\t')            
+        y_train = df_train[0]
+        y_test = df_test[0]
+        X_train = df_train.drop(0, axis=1)
+        X_test = df_test.drop(0, axis=1)
+        # 训练
+        gbm = lgb.LGBMRegressor(objective='regression',
+                                num_leaves=31,
+                                learning_rate=0.05,
+                                n_estimators=20)
+        gbm.fit(X_train, y_train,
+                eval_set=[(X_test, y_test)],    #用于早停的(X,y)验证集元组对。
+                eval_metric='l1',   #l1正则化。内置评价标准，可理解为损失函数。
+                early_stopping_rounds=5)        
+        print('Start predicting...')
+        # 预测
+        y_pred = gbm.predict(X_test, num_iteration=gbm.best_iteration)
+        # 评估
+        print('The rmse of prediction is:', mean_squared_error(y_test, y_pred) ** 0.5)  
+        print('Calculate feature importances...')
+        # 输出特征重要度
+        print('Feature importances:', list(gbm.feature_importances_))       #特征重要度：feature_importances_
+        # 交叉验证与网格搜索
+        estimator = lgb.LGBMRegressor(num_leaves=31)            
+        param_grid = {
+            'learning_rate': [0.01, 0.1, 1],
+            'n_estimators': [20, 40]
+        }           
+        gbm = GridSearchCV(estimator, param_grid)           
+        gbm.fit(X_train, y_train)
+
+        可视化：
+            print('Plot metrics during training...')
+            ax = lgb.plot_metric(evals_result, metric='l1')
+            plt.show()
+            print('Plot feature importances...')
+                ax = lgb.plot_importance(gbm, max_num_features=10)
+            plt.show()
+</code></pre>
+
+<p>5.NLP问题：</p>
+<pre><code>1. 词频抽取：
+    from sklearn.feature_extraction.text import CountVectorizer
+    参数：
+        input：string {'filename'，'file'，'content'}
+        encoding：string，'utf-8'默认。
+        decode_error：{'strict'，'ignore'，'replace'}
+            如果字节序列被给予包含不是给定编码的字符的分析，则应该做什么。
+            默认情况下，它是'strict'，这意味着将引发UnicodeDecodeError。其他值为“ignore”和“replace”。
+        strip_accents：{'ascii'，'unicode'，None}
+            在预处理步骤中删除重音符号。
+        analyzer：string，{'word'，'char'，'char_wb'}或callable
+            该特征是否应该由字或字符n-gram组成。选项'char_wb'仅从字边界内的文本创建字符n-gram。
+        tokenizer：callable或None（默认）
+            覆盖字符串标记化步骤，同时保留预处理和n-gram生成步骤。仅适用于analyzer =='word'。
+        ngram_range：tuple（min_n，max_n）
+            要提取的不同n-gram的n值范围的下限和上限。将使用n的所有值，使得min_n &lt;= n &lt;= max_n。
+        stop_words：string {'english'}，列表或无（默认）
+            如果是“英语”，则使用英语的内置停止词列表。
+            如果列表，该列表假设包含停用词，所有这些都将从生成的令牌中删除。仅适用于analyzer =='word'。
+            如果为None，则不使用停用词。
+        lowercase：boolean，默认为True
+            在标记化之前将所有字符转换为小写。
+        token_pattern：string
+        max_df：float in range [0.0，1.0]或int，default = 1.0
+            当构建词汇时忽略具有严格高于给定阈值的文档频率（语料库特定停止词）的词语。
+            如果float，该参数表示文档的比例，整数绝对计数。
+            如果词汇不为None，则忽略此参数。
+        min_df：float in range [0.0，1.0]或int，default = 1
+            当构建词汇时忽略具有严格低于给定阈值的文档频率的词语。该值在文献中也称为截止值。
+            如果float，该参数表示文档的比例，整数绝对计数。如果词汇不为None，则忽略此参数。
+        max_features：int或None，default = None
+            如果不是无，建立一个词汇，只考虑顶部的max_features按词频率排序的语料库。
+            如果词汇不为None，则忽略此参数。
+        preprocessor：
+            设置预处理函数。
+    属性： 
+        vocabulary_ : dict
+            A mapping of terms to feature indices.
+        stop_words_ : set
+    函数：
+        decode(doc) Decode the input into a string of unicode symbols
+        fit(raw_documents[, y]) Learn a vocabulary dictionary of all tokens in the raw documents.
+        fit_transform(raw_documents[, y])   Learn the vocabulary dictionary and return term-document matrix.
+        get_feature_names() Array mapping from feature integer indices to feature name
+        get_params([deep])  Get parameters for this estimator.
+        get_stop_words()    Build or fetch the effective stop words list
+        inverse_transform(X)    Return terms per document with nonzero entries in X.
+        set_params(\*\*params)  Set the parameters of this estimator.
+        transform(raw_documents)    Transform documents to document-term matrix.
+
+2. TF-IDF向量构建
+    sklearn.feature_extraction.text.TfidfVectorizer
+    DEMO:
+    class sklearn.feature_extraction.text.TfidfVectorizer(input=u'content', encoding=u'utf-8', 
+    decode_error=u'strict', strip_accents=None, lowercase=True, preprocessor=None, tokenizer=None, 
+    analyzer=u'word', stop_words=None, token_pattern=u'(?u)\b\w\w+\b', ngram_range=(1, 1), max_df=1.0, 
+    min_df=1, max_features=None, vocabulary=None, binary=False, dtype=&lt;type 'numpy.int64'&gt;, norm=u'l2', 
+    use_idf=True, smooth_idf=True, sublinear_tf=False)
+    ATTR：
+        vocabulary_ : dict
+        idf_ : array, shape = [n_features], or None
+        stop_words_ : set
+    FUNC：
+        decode(doc) Decode the input into a string of unicode symbols
+        fit(raw_documents[, y]) Learn vocabulary and idf from training set.
+        fit_transform(raw_documents[, y])   Learn vocabulary and idf, return term-document matrix.
+        get_feature_names() Array mapping from feature integer indices to feature name
+        get_params([deep])  Get parameters for this estimator.
+        get_stop_words()    Build or fetch the effective stop words list
+        inverse_transform(X)    Return terms per document with nonzero entries in X.
+        set_params(\*\*params)  Set the parameters of this estimator.
+        transform(raw_documents[, copy])    Transform documents to document-term matrix.
+
+3. 朴素贝叶斯分类器
+    sklearn.naive_bayes.MultinomialNB
+    PARAM：
+        alpha：float，optional（default = 1.0）
+            加平滑参数（0表示无平滑）。
+        fit_prior：boolean，optional（default = True）
+            是否学习类先验概率。 如果为假，将使用统一的先验。
+        class_prior：array-like，size（n_classes，），optional（default = None）
+            类的先验概率。 如果指定，先验不根据数据调整。
+    ATTR：
+        class_log_prior_：array，shape（n_classes，）
+            平滑每个类的经验log概率。
+        intercept_：属性
+            Mirrors class_log_prior_用于将MultinomialNB解释为线性模型。
+        feature_log_prob_：array，shape（n_classes，n_features）
+            给定类别的特征的经验对数概率P（x_i | y）。
+        coef_：property
+            Mirrors feature_log_prob_ for interpreting MultinomialNB as a linear model.
+        class_count_：array，shape（n_classes，）
+            拟合期间每个类遇到的样本数。 
+        feature_count_：array，shape（n_classes，n_features）
+            在拟合期间每个（类，特征）遇到的样本数。 该值在提供时由样本权重加权。
+    FUNC：
+        fit(X, y[, sample_weight])  Fit Naive Bayes classifier according to X, y
+        get_params([deep])  Get parameters for this estimator.
+        partial_fit(X, y[, classes, sample_weight]) Incremental fit on a batch of samples.
+        predict(X)  Perform classification on an array of test vectors X.
+        predict_log_proba(X)    Return log-probability estimates for the test vector X.
+        predict_proba(X)    Return probability estimates for the test vector X.
+        score(X, y[, sample_weight])    Returns the mean accuracy on the given test data and labels.
+        set_params(\*\*params)  Set the parameters of this estimator.
+
+4. Word2Vec
+    from gensim.models.word2vec import Word2Vec
+    深度学习模型：
+        构建词向量可以衡量词与词之间的相关程度，维度k是一个超参数。分布式词向量一定程度上反映了相关性。
+        避免了独热编码可能导致的没有反应相关性与维度灾难。
+    Demo中的思路参考：
+        读入数据，进行预处理。
+        Word2Vec为每个词构建词向量，在此基础上对词向量求平均，计算得到句向量。
+        使用句向量与其target，使用SVM模型进行分类。(句向量作为输入)
+            def get_train_vecs(x_train,x_test):
+                n_dim = 300
+                #初始化模型和词表
+                imdb_w2v = Word2Vec(size=n_dim, min_count=10)
+                imdb_w2v.build_vocab(x_train)
+                #在评论训练集上建模(可能会花费几分钟)
+                imdb_w2v.train(x_train)             
+                train_vecs = np.concatenate([build_sentence_vector(z, n_dim,imdb_w2v) for z in x_train])
+                #train_vecs = scale(train_vecs)             
+                np.save('svm_model_data/data/train_vecs.npy',train_vecs)
+                print train_vecs.shape
+                #在测试集上训练
+                imdb_w2v.train(x_test)
+                imdb_w2v.save('svm_model_data/model/model.pkl')
+                #Build test tweet vectors then scale
+                test_vecs = np.concatenate([build_sentence_vector(z, n_dim,imdb_w2v) for z in x_test])
+                #test_vecs = scale(test_vecs)
+                np.save('svm_model_data/data/test_vecs.npy',test_vecs)
+                print test_vecs.shape
+
+5. 其他：
+    LSTM神经网络在情感分类的应用。
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

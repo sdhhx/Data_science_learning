@@ -1,0 +1,229 @@
+1.	爬虫项目
+	spiders文件夹下编写多个爬虫，即可形成一个爬虫项目。
+	注意修改配置文件，保证加载正确的piplines 和 middlewares。
+	常用命令：
+		scrapy list
+		scrapy crawl 爬虫名	#适用于工程
+
+2. 爬虫登陆：
+	2.1 库与函数：
+	from x import y as z
+	python不允许程序员选择采用传值还是传引用。Python参数传递采用的肯定是“传对象引用”的方式。这种方式相当于传值和传引用的一种综合。(类Java)
+	(C++分配内存，调用拷贝构造函数)
+	(1) urlparse:
+		<1> res = urlparse.urlparse(url,scheme,allow_fragments)
+			返回一个6-tuple，类型是ParseResult(scheme, netloc, path, params, query, fragment)
+		<2> urlparse.urlunparse(parts)，它接收一个元组类型，将元组内对应元素重新组后为一个url网址，与上面功能正好相反。
+		<3> urlparse.urlsplit(url)，作用与urlparse非常相似，它不会分解url参数，对于遵循RFC2396的URL很有用处。
+		<4> urlparse.urljoin(base, url ) 功能是基于一个base url和另一个url构造一个绝对URL。
+		<5> urlparse.parse_qs(qs[, keep_blank_values[, strict_parsing]])
+			Parse a query string given as a string argument (data of type application/x-www-form-urlencoded). Data are returned as a *dictionary*. The dictionary keys are the unique query variable names and the values are lists of values for each name.
+			解析一个作为字符串参数给定的查询字符串（数据类型application/x-www-form-urlencoded）。作为字典返回数据。字典键是唯一的查询变量名，值是每个名称的值列表。
+			captcha_id = urlparse.parse_qs(urlparse.urlparse(link).query, True)['id']
+		<6> urlparse.parse_qsl(qs[, keep_blank_values[, strict_parsing]])
+			Parse a query string given as a string argument (data of type application/x-www-form-urlencoded). Data are returned as a *list* of name, value pairs.
+
+	(2) urllib
+		<1> urllib.urlopen(url[,data[,proxies]])
+			打开一个url的方法，返回一个文件对象，然后可以进行类似文件对象的操作。
+				read() , readline() ,readlines() , fileno() , close() ：这些方法的使用方式与文件对象完全一样
+		        info()：返回一个httplib.HTTPMessage对象，表示远程服务器返回的头信息
+		         getcode()：返回Http状态码。如果是http请求，200请求成功完成;404网址未找到
+		         geturl()：返回请求的url
+		<2> urllib.urlretrieve(url[,filename[,reporthook[,data]]])
+			urlretrieve方法将url定位到的html文件下载到你本地的硬盘中。如果不指定filename，则会存为临时文件。
+			urlretrieve()返回一个二元组(filename,mine_hdrs)
+		<3> urllib.quote(url)和urllib.quote_plus(url)
+			将url数据获取之后，并将其编码，从而适用与URL字符串中，使其能被打印和被web服务器接受。
+		<4> urllib.urlencode(query)
+			将URL中的键值对以连接符&划分
+			这里可以与urlopen结合以实现post方法和get方法：
+
+	(3) Faker
+			一个可以让你生成伪造数据的Python包
+
+	2.2 爬虫登陆脚本
+	(1) 字段与函数
+		headers: http报文头
+		formdata: 发送数据内容
+		start_requests(): 爬虫入口
+
+		Request和Response对象：
+			Request:
+				class scrapy.http.Request(url[, callback, method='GET', headers, body, cookies, meta, encoding='utf-8', priority=0, dont_filter=False, errback])
+				dont_filter = True #指定url不需要滤虫。例如多次访问同一网站，要再发一次请求。
+			Response:
+				class scrapy.http.Response(url[, status=200, headers=None, body=b'', flags=None, request=None])
+					url (string) – the URL of this response
+					status (integer) – the HTTP status of the response. Defaults to 200.
+					headers (dict) – the headers of this response. The dict values can be strings (for single valued headers) or lists (for multi-valued headers).
+					body (str) – the response body. It must be str, not unicode, unless you’re using a encoding-aware Response subclass, such as TextResponse.
+					flags (list) – is a list containing the initial values for the Response.flags attribute. If given, the list will be shallow copied.
+					request (Request object) – the initial value of the Response.request attribute. This represents the Request that generated this response.
+
+			meta={'cookiejar': response.meta['cookiejar']}#登陆完毕后，保存本次登陆的cookies维持登陆状态
+			其他参数详见: https://doc.scrapy.org/en/latest/topics/request-response.html#topics-request-meta
+	(2) 中间件
+		Writing your own downloader middleware:
+			process_request(request, spider)
+				This method is called for each request that goes through the download middleware.
+				process_request() should either: return None, return a Response object, return a Request object, or raise IgnoreRequest.
+			process_response(request, response, spider)
+
+			eg: return HtmlResponse(request.url,body = page,encoding = 'utf-8',request = request,)
+			The HtmlResponse class is a subclass of TextResponse which adds encoding auto-discovering support by looking into the HTML meta http-equiv attribute. See TextResponse.encoding.
+
+		UserAgentMiddleware:
+			Middleware that allows spiders to override the default user agent.
+			In order for a spider to override the default user agent, its user_agent attribute must be set.
+
+	(3) piplines
+		process_item(self, item, spider)
+		处理输出
+		拓展(中间件也有)：
+			读取设置一般通过from_settings函数实现。
+			@classmethod
+			def from_settings(cls, settings):
+				return cls(server, persist, queue_key, queue_cls, dupefilter_key, idle_before_close)#参数随意
+			from_crawler():
+				Scrapy API的主要入口是 Crawler 的实例对象， 通过类方法 from_crawler 将它传递给扩展(extensions)。 该对象提供对所有Scrapy核心组件的访问， 也是扩展访问Scrapy核心组件和挂载功能到Scrapy的唯一途径。
+				from_crawler(cls, crawler)
+				If present, this classmethod is called to create a pipeline instance from a Crawler. It must return a new instance of the pipeline. Crawler object provides access to all Scrapy core components like settings and signals; it is a way for pipeline to access them and hook its functionality into Scrapy.
+				def from_crawler(cls, crawler):
+					instance = cls.from_settings(crawler.settings)
+　　				return instance
+
+				from scrapy.conf import settings #引入配置文件，import也可
+
+	(4) 范例
+		见douban爬虫项目
+
+	(5) 其他
+		可以在item内进行字符串操作
+		item->spider->piplines->settings 的操作流程
+		middlewares 在需要的时候编写即可
+
+3. 动态网页爬取
+	3.1 库与函数
+	(1) lxml
+		首先我们使用 lxml 的 etree 库，然后利用 etree.HTML 初始化，然后我们将其打印出来。
+		from lxml import etree
+		text = '''
+		<div>
+		    <ul>
+		         <li class="item-0"><a href="link1.html">first item</a></li>
+		         <li class="item-1"><a href="link2.html">second item</a></li>
+		         <li class="item-inactive"><a href="link3.html">third item</a></li>
+		         <li class="item-1"><a href="link4.html">fourth item</a></li>
+		         <li class="item-0"><a href="link5.html">fifth item</a>
+		     </ul>
+		 </div>
+		'''
+		html = etree.HTML(text)
+		result = etree.tostring(html)
+		print(result)
+		首先我们使用 lxml 的 etree 库，然后利用 etree.HTML 初始化，然后我们将其打印出来。
+		其中，这里体现了 lxml 的一个非常实用的功能就是自动修正 html 代码，大家应该注意到了，最后一个 li 标签，其实我把尾标签删掉了，是不闭合的。不过，lxml 因为继承了 libxml2 的特性，具有自动修正 HTML 代码的功能。
+
+		除了直接读取字符串，还支持从文件读取内容。
+		from lxml import etree
+		html = etree.parse('hello.html')
+		result = etree.tostring(html, pretty_print=True)
+		print(result)
+
+	(2) Selenium
+		使用 Selenium WebDriver编写 功能/验收测试
+		selenium.webdriver 模块
+		提供了所有 WebDriver的实现
+		eg:
+			from selenium import webdriver
+			from selenium.webdriver.common.keys import Keys #按键编码
+			driver = webdriver.Firefox()	#Firefox实例
+			#driver = webdriver.Chrome(executable_path="/path/to/chromedriver")	#Chrome
+			driver.get("http://www.python.org")	#打开网页
+			elem.clear()#清除原内容
+			elem.send_keys("pycon")
+			elem.send_keys(Keys.RETURN)
+			assert "No results found." not in driver.page_source	#确认是否有返回
+			driver.close()
+
+		元素定位：
+			find_element_by_id/name/xpath/link_text/partial_link_text/tag_name/class_name/css_selector(多个元素find_elements_by_)
+
+		页面交互:
+				element = driver.find_element_by_name("passwd")
+				element.send_keys(" and some", Keys.ARROW_DOWN)
+				element.clear()
+			选择框:
+				element = driver.find_element_by_xpath("//select[@name='name']")
+				all_options = element.find_elements_by_tag_name("option")
+				for option in all_options:
+					print("Value is: %s") % option.get_attribute("value")
+					option.click()
+			元素拖拽
+			在窗口(window)和框架(frame)间移动
+			弹出对话框
+			导航：历史记录和定位
+			Cookies
+
+		页面对象:
+			driver.page_source
+
+		execute_script 方法来在载入的页面上执行JS:
+			滚动到页面底部：
+				driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+
+		异步(ajax):
+			显式Waits:
+				显式的 waits 等待一个确定的条件触发然后才进行更深一步的执行。 time.sleep()，这指定的条件是等待一个指定的时间段。
+				element = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.ID,"myDynamicElement")) #另一种，只等待需要的时间
+			隐式Waits:
+				隐式等待, 此处的隐式等待是针对Driver每次执行命令的最长执行时间也可以理解为超时时间
+				driver.implicitly_wait(10) # 时间second
+
+	3.2 范例
+		写法思路为在middlewares里构建中间件，收到请求后用selenium交互，然后使用爬虫爬取整个网页
+
+4. 分页爬取的一种思路
+
+	即使用meta携带数据完成
+
+	def parse_page1(self, response):
+	    item = MyItem()
+	    item['main_url'] = response.url
+	    request = scrapy.Request("http://www.example.com/some_page.html", callback=self.parse_page2)
+	    request.meta['item'] = item
+	    return request
+
+	def parse_page2(self, response):
+	    item = response.meta['item']
+	    item['other_url'] = response.url
+	    return item
+
+5. 图片爬取
+
+	方法一:
+		class DoubanImgDownloadPipeline(ImagesPipeline)，继承ImagesPipeline完成。
+			#发送图片请求
+			def get_media_requests(self, item, info):
+				yield Request(***)
+			#图片下载完成，必须返回item
+			def item_completed(self, results, item, info):
+				#results参数：	success/fail, imageinfo二元组
+				return item
+
+		class DoubanImgsItem(scrapy.Item):
+		    # define the fields for your item here like:
+		    # name = scrapy.Field()
+		    image_urls = Field()
+		    images = Field()
+		    image_paths = Field()
+
+	方法二:
+		使用Requests低级类：
+			requests.Request(method=None, url=None, headers=None, files=None, data=None, params=None, auth=None, cookies=None, hooks=None, json=None)
+			Constructs a Request, prepares it and sends it. Returns Response object.
+			将回复写入文件。
+			具体用法详见GirlImageCrawl
+			(Requests类: HTTP类)
+

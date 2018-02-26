@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MachineLearning1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Machine Learning API</h1>
+<p>@Author hehaoxing</p>
+<h2>1. Distutils</h2>
+<pre><code>Distutils可以用来在Python环境中构建和安装额外的模块。新的模块可以是纯Python的，也可以是用C/C++写的扩展模块
+，或者可以是Python包，包中包含了由C和Python编写的模块。
+</code></pre>
+
+<hr />
+<h2>2. sklearn常用类与函数</h2>
+<h3>sklearn数据集：</h3>
+<pre><code>from sklearn import datasets &lt;/br&gt;
+import numpy as np &lt;/br&gt;
+iris = datasets.load_iris() &lt;/br&gt;
+数据一般分为两部分：数据(data)与标签(target)&lt;/br&gt;
+X = iris.data[:, [2, 3]]&lt;/br&gt;
+y = iris.target&lt;/br&gt;
+</code></pre>
+
+<h3>数据集与训练集划分</h3>
+<pre><code>if Version(sklearn_version) &lt; '0.18':
+    from sklearn.cross_validation import train_test_split
+else:
+    from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+</code></pre>
+
+<h3>数据标准化</h3>
+<pre><code>#标准化：安装均值和方差对数据进行放缩
+    1.from sklearn.preprocessing import StandardScaler
+    sc = StandardScaler()   #创建一个新的类
+    2.from sklearn.preprocessing import MinMaxScaler            #另一种标准化
+    mms = MinMaxScaler()
+    X_train_norm = mms.fit_transform(X_train)
+    X_test_norm = mms.transform(X_test)
+#可选参数：copy : boolean, optional, default True (若为False，原地正则化)
+    sc.fit(X_train)         #计算训练集的均值和方差，用于随后的标准化
+    X_train_std = sc.transform(X_train)     #标准化数据
+##fit_transform:    fit &amp;&amp; transform
+    X_test_std = sc.transform(X_test)
+</code></pre>
+
+<h3>处理缺失值</h3>
+<pre><code>sklearn.preprocessing.Imputer
+Imputer(missing_values='NaN', strategy='mean', axis=0, verbose=0, copy=True)
+    strategy：“mean”，“median”，“most_frequent”
+    copy:可以理解为是否原地
+方法： 
+    fit(X[, y])             Fit the imputer on X.
+    fit_transform(X[, y])   Fit to data, then transform it.
+    get_params([deep])      Get parameters for this estimator.
+    set_params(\*\*params)  Set the parameters of this estimator.
+    transform(X)            Impute all missing values in X.
+预测器API
+</code></pre>
+
+<h3>类别编码</h3>
+<pre><code>1.Dateframe的map函数
+2.LabelEncoder类
+    from sklearn.preprocessing import LabelEncoder
+    class_le = LabelEncoder()
+    y = class_le.fit_transform(df['classlabel'].values)
+3.One-Hot编码
+    #将非数字拆分，值作为1列，0/1做有无
+    1.from sklearn.preprocessing import OneHotEncoder       One-Hot编码
+    ohe = OneHotEncoder(categorical_features=[0])
+    ohe.fit_transform(X).toarray()
+    2.pd.get_dummies(df)                                    同样可以用于One-Hot编码
+</code></pre>
+
+<hr />
+<h2>3.sklearn常用算法一览</h2>
+<p><font size=50> entropy :	熵	</font></br>
+<font size=50> verbose :	冗余	</font></p>
+<h3>线性回归</h3>
+<pre><code>from sklearn.linear_model import LinearRegression
+class sklearn.linear_model.LinearRegression(fit_intercept=True, normalize=False, copy_X=True, n_jobs=1)
+属性：
+    coef_ : array, shape (n_features, ) or (n_targets, n_features)
+    residues_ : array, shape (n_targets,) or (1,) or empty
+    intercept_ : array
+函数:
+    fit(X, y[, sample_weight])  Fit linear model.
+    get_params([deep])  Get parameters for this estimator.
+    predict(X)  Predict using the linear model
+    score(X, y[, sample_weight])    Returns the coefficient of determination R^2 of the prediction.
+    set_params(\*\*params)  Set the parameters of this estimator.
+使用RANSAC提高鲁棒性：
+    ransac = RANSACRegressor(LinearRegression(),    #预测器
+                         max_trials=100,            #随机样本选择的最大迭代次数
+                         min_samples=50,            #从原始数据随机选择的最小样本数。
+                         loss='absolute_loss',      #“absolute_loss”和“squared_loss”，损失函数
+                                                    #如果样本上的损失大于residual_threshold，则该样本被分类为异常值。
+                         residual_threshold=5.0,    #如上
+                         random_state=0)            #随机         
+        fit(X, y[, sample_weight])  Fit estimator using RANSAC algorithm.
+        get_params([deep])  Get parameters for this estimator.
+        predict(X)  Predict using the estimated model.
+        score(X, y) Returns the score of the prediction.
+        set_params(\*\*params)  Set the parameters of this estimator.
+多项式回归：
+    from sklearn.preprocessing import PolynomialFeatures
+    sklearn.preprocessing.PolynomialFeatures(degree=2, interaction_only=False, include_bias=True)
+    生成多项式和交互特征。
+    生成由特征度小于或等于指定度的特征的所有多项式组合组成的新特征矩阵。
+    例如，如果输入样本是二维的并且具有形式[a，b]，则度数2多项式特征是[1，a，b，a ^ 2，ab，b ^ 2]。
+    eg:
+        from sklearn.preprocessing import PolynomialFeatures
+        lr = LinearRegression()
+        pr = LinearRegression()
+        #degree=2 指的是维度
+        quadratic = PolynomialFeatures(degree=2)
+        #预处理生成二次多项式的特征
+        X_quad = quadratic.fit_transform(X)
+        lr.fit(X, y)
+        X_fit = np.arange(250, 600, 10)[:, np.newaxis]
+        y_lin_fit = lr.predict(X_fit)
+        # fit quadratic features
+        #使用被计算的二次多项特征进行线性拟合
+        pr.fit(X_quad, y)
+        #同样，用新的二次多项式特征作为数据，进行拟合
+        y_quad_fit = pr.predict(quadratic.fit_transform(X_fit))
+决策树回归：
+    from sklearn.tree import DecisionTreeRegressor
+随机森林回归：
+    from sklearn.ensemble import RandomForestRegressor
+</code></pre>
+
+<h3>感知器</h3>
+<pre><code>sklearn.linear_model.Perceptron(version 0.18.1)
+#BP神经网络，通过前向感知与后向传播来对平面进行划分。
+参数：
+    penalty : None, ‘l2’ or ‘l1’ or ‘elasticnet’
+        正则化系数项，默认取None。
+    alpha : float
+        正则化系数，默认取0.0001。
+    fit_intercept : bool
+        判断是否应估计截距，若为False，则数据默认已居中。默认为True。
+    n_iter : int, optional
+        训练集数据的迭代次数。默认取5。
+    shuffle : bool, optional, default True
+        训练集数据是否每轮洗牌。
+    random_state : int seed, RandomState instance, or None (default)
+        混洗数据时使用的伪随机数种子。
+    verbose : integer, optional
+        ???冗余度
+    n_jobs : integer, optional
+        使用的CPU数目，默认取1.
+    eta0 : double
+        每次更新相乘的系数，默认取1.
+    class_weight : dict, {class_label: weight} or “balanced” or None, optional
+        类的权重设定。
+        Preset for the class_weight fit parameter.
+        Weights associated with classes. If not given, all classes are supposed to have weight one.
+        The “balanced” mode uses the values of y to automatically adjust weights inversely proportional
+        to class frequencies in the input data as n_samples / (n_classes * np.bincount(y))
+    warm_start : bool, optional
+        重用上次调用的方案进行初始化
+属性：
+    coef_：常见，决策函数的系数
+    intercept_：截距
+函数：
+    fit(X, y[, coef_init, intercept_init, ...]) 
+        SGD算法拟合线性模型
+    fit_transform(X[, y])
+        fit &amp;&amp; transform
+    decision_function(X)
+        预测采样置信度
+    densify()
+        系数矩阵转换为密集数组格式
+    predict(X)
+        为X中的采样预测类别标签(Target)
+    score(X, y[, sample_weight])    
+        返回给定测试集和标签的平均准确度
+</code></pre>
+
+<h3>sklearn.metrics.accuracy_score</h3>
+<pre><code>#预测精准度
+    sklearn.metrics.accuracy_score(y_true, y_pred, normalize=True, sample_weight=None)[source]
+    return float(score)
+</code></pre>
+
+<h3>图片显示</h3>
+<pre><code>plt.tight_layout() # 紧凑显示图片,
+plt.show()         # 居中显示
+</code></pre>
+
+<h3>画水平或者垂线</h3>
+<pre><code>plt.axhline()   #水平
+plt.axvline()   #铅直
+</code></pre>
+
+<h3>逻辑斯蒂回归</h3>
+<pre><code>from sklearn.linear_model import LogisticRegression(version 0.18.1)
+#带入sigmod函数计算概率分类。
+#正如常见的传统机器学习算法，我们需要最小化损失函数。
+参数：
+    penalty : str, ‘l1’ or ‘l2’, default: ‘l2’
+    dual : bool, default: False
+        Dual or primal formulation. Dual formulation is only implemented for l2 penalty
+        with liblinear solver. Prefer dual=False when n_samples &gt; n_features.
+    C : float, default: 1.0
+        逆正则化强度，小的值代表强的正则化。
+    fit_intercept : bool, default: True
+    class_weight : dict or ‘balanced’, default: None
+    max_iter : int, default: 100
+        Useful only for the newton-cg, sag and lbfgs solvers. 
+        求解器收敛的最大迭代次数。
+    random_state : int seed, RandomState instance, default: None
+        混洗数据时的伪随机数种子。
+        Used only in solvers ‘sag’ and ‘liblinear’.
+    solver : {‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’}, default: ‘liblinear’
+        用于优化问题的算法。
+        小数据集使用“liblinear”，大数据集使用“sag”。
+        对于多分类问题，只有'newton-cg'，'sag'和'lbfgs'处理多项式损失; 'liblinear'限于一对一休息方案???。
+        'newton-cg'，'lbfgs'和'sag'只处理L2惩罚。
+    tol : float, default: 1e-4
+        Tolerance for stopping criteria.
+    multi_class : str, {‘ovr’, ‘multinomial’}, default: ‘ovr’
+        多类参数
+    verbose : int, default: 0
+        冗余度
+        For the liblinear and lbfgs solvers set verbose to any positive number for verbosity.   
+    warm_start : bool, default: False
+    n_jobs : int, default: 1
+属性：     
+    coef_ : array, shape (n_classes, n_features)
+        决策函数的特征参数
+    intercept_ : array, shape (n_classes,)
+        截距
+    n_iter_ : array, shape (n_classes,) or (1, )
+        所有类的实际迭代次数
+函数：     
+    decision_function(X)    
+        Predict confidence scores for samples.
+    densify()   
+        Convert coefficient matrix to dense array format.
+    fit(X, y[, sample_weight])  
+        Fit the model according to the given training data.
+    fit_transform(X[, y])   
+        Fit to data, then transform it.
+    get_params([deep])  
+        Get parameters for this estimator.
+    predict(X)  
+        Predict class labels for samples in X.
+    predict_log_proba(X)    
+        Log of probability estimates.
+    predict_proba(X)    
+        Probability estimates.
+    score(X, y[, sample_weight])    
+        Returns the mean accuracy on the given test data and labels.
+    set_params(\*\*params)  
+        Set the parameters of this estimator.
+    sparsify()  
+        Convert coefficient matrix to sparse format.
+</code></pre>
+
+<h3>支持向量机</h3>
+<pre><code>#最大间隔分类，支持向量机
+#松弛变量
+#核函数
+sklearn.svm.SVC：
+参数：
+    C : float, optional (default=1.0)
+        误差项的惩罚参数C(正则化系数的意思?)
+    kernel : string, optional (default=’rbf’)
+        核函数算法：  ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ 或 可调用项.
+        rdf:    高斯xx函数.
+    degree : int, optional (default=3)
+        多项式核函数的度数，被其他维度忽略.
+    gamma : float, optional (default=’auto’)
+        'rbf'，'poly'和'sigmoid'的核系数。 如果gamma是'auto'，那么将使用1 / n_features。
+    coef0 : float, optional (default=0.0)
+        核函数中的独立项。 它只在“poly”和“sigmoid”中有意义。
+    probability : boolean, optional (default=False)
+        是否启用概率估计。 这必须在调用fit之前启用，并且将使fit方法变慢。
+    shrinking : boolean, optional (default=True)
+        Whether to use the shrinking heuristic.
+    tol : float, optional (default=1e-3)
+        Tolerance for stopping criterion.
+    cache_size : float, optional
+        Specify the size of the kernel cache (in MB).
+    class_weight : {dict, ‘balanced’}, optional
+        类权重
+    verbose : bool, default: False
+        Enable verbose output. Note that this setting takes advantage of a per-process runtime
+        setting in libsvm that, if enabled, may not work properly in a multithreaded context.
+    max_iter : int, optional (default=-1)
+        迭代器的次数限制。
+    decision_function_shape : ‘ovo’, ‘ovr’ or None, default=None        
+    random_state : int seed, RandomState instance, or None (default)
+        The seed of the pseudo random number generator to use when shuffling the data for probability estimation.
+        伪随机数发生器的种子，用于在混洗数据进行概率估计时使用。
+属性：
+    support_ : array-like, shape = [n_SV]
+        Indices of support vectors.
+        支持向量的指数。
+    support_vectors_ : array-like, shape = [n_SV, n_features]
+        Support vectors.
+        支持向量。
+    n_support_ : array-like, dtype=int32, shape = [n_class]
+        Number of support vectors for each class.
+        每类支持向量的数目
+    dual_coef_ : array, shape = [n_class-1, n_SV]
+        决策函数中支持向量的系数。
+    coef_ : array, shape = [n_class-1, n_features]
+        分配给特征的权重（原始问题中的系数）。 这仅在线性内核的情况下可用。
+        coef_是从dual_coef_和support_vectors_派生的只读属性。
+    intercept_ : array, shape = [n_class * (n_class-1) / 2]
+        决策函数中的常数。
+方法：
+    decision_function(X)
+        Distance of the samples X to the separating hyperplane.
+        样本X到分割超平面的距离。
+    fit(X, y[, sample_weight])
+        Fit the SVM model according to the given training data.
+        按照给定训练数据匹配SVM模型。
+    get_params([deep])
+        Get parameters for this estimator.
+    predict(X)
+        Perform classification on samples in X.
+        展示X中样本的分类效果。
+    score(X, y[,     sample_weight])
+        Returns the mean accuracy on the given test data and labels.
+        给定测试集和标签的平均准确率.
+    set_params(\*\*params)
+        Set the parameters of this estimator.
+</code></pre>
+
+<h1>rbf :  <img src="rbf.png" alt="Alt text" /></h1>
+<h3>决策树</h3>
+<p>最大化信息增益</p>
+<pre><code>from sklearn.tree import DecisionTreeClassifier
+参数：
+    criterion:string类型，可选（默认为&quot;gini&quot;）
+        选一个最大化。
+        衡量分类的质量。支持的标准有&quot;gini&quot;代表的是Gini impurity(不纯度)与&quot;entropy&quot;代表的是information gain（信息增益）。
+    splitter:string类型，可选（默认为&quot;best&quot;）
+        一种用来在节点中选择分类的策略。支持的策略有&quot;best&quot;，选择最好的分类，&quot;random&quot;选择最好的随机分类。
+    max_features:int,float,string or None 可选（默认为None）
+        在进行分类时需要考虑的特征数。
+        1.如果是int，在每次分类是都要考虑max_features个特征。
+        2.如果是float,那么max_features是一个百分率并且分类时需要考虑的特征数是int(max_features*n_features,
+        其中n_features是训练完成时发特征数)。
+        3.如果是auto,max_features=sqrt(n_features)
+        4.如果是sqrt,max_features=sqrt(n_features)
+        5.如果是log2,max_features=log2(n_features)
+        6.如果是None，max_features=n_features
+        注意：至少找到一个样本点有效的被分类时，搜索分类才会停止。
+    max_depth:int or None,可选（默认为&quot;None&quot;）
+        表示树的最大深度。
+        如果是&quot;None&quot;,则节点会一直扩展直到所有的叶子都是纯的或者所有的叶子节点都包含少于min_samples_split个样本点。
+        忽视max_leaf_nodes是不是为None。
+    min_samples_split:int,float,可选（默认为2）
+        区分一个内部节点需要的最少的样本数。    
+        1.如果是int，将其最为最小的样本数。
+        2.如果是float，min_samples_split是一个百分率并且ceil(min_samples_split*n_samples)是每个分类需要的样本数。
+        ceil是取大于或等于指定表达式的最小整数。
+    min_samples_leaf:int,float,可选（默认为1）
+        一个叶节点所需要的最小样本数：
+        1.如果是int，则其为最小样本数
+        2.如果是float，则它是一个百分率并且ceil(min_samples_leaf*n_samples)是每个节点所需的样本数。
+    min_weight_fraction_leaf:float,可选（默认为0）
+        一个叶节点的输入样本所需要的最小的加权分数。
+    max_leaf_nodes:int,None 可选（默认为None）
+        在最优方法中使用max_leaf_nodes构建一个树。最好的节点是在杂质相对减少。如果是None则对叶节点的数目没有限制。
+        如果不是None则不考虑max_depth.
+    class_weight:dict,list of dicts,&quot;Banlanced&quot; or None,可选（默认为None）
+        表示在表{class_label:weight}中的类的关联权值。如果没有指定，所有类的权值都为1。
+        对于多输出问题，一列字典的顺序可以与一列y的次序相同。
+        &quot;balanced&quot;模型使用y的值去自动适应权值，并且是以输入数据中类的频率的反比例。
+        如：n_samples/(n_classes*np.bincount(y))。
+        对于多输出，每列y的权值都会想乘。
+        如果sample_weight已经指定了，这些权值将于samples以合适的方法相乘。
+    random_state:int,RandomState instance or None
+        如果是int,random_state 是随机数字发生器的种子；如果是RandomState，random_state是随机数字发生器，如果是None，
+        随机数字发生器是np.random使用的RandomState instance.
+    persort:bool,可选（默认为False）
+        是否预分类数据以加速训练时最好分类的查找。在有大数据集的决策树中，如果设为true可能会减慢训练的过程。
+        当使用一个小数据集或者一个深度受限的决策树中，可以减速训练的过程。
+属性：
+    classes_ : array of shape = [n_classes] or a list of such arrays
+        The classes labels (single output problem), or a list of arrays of class labels (multi-output problem).
+    feature_importances_ : array of shape = [n_features]
+        The feature importances. The higher, the more important the feature. 
+        The importance of a feature is computed as the (normalized) total reduction of the criterion brought by that feature.
+        It is also known as the Gini importance.
+    max_features_ : int,
+        The inferred value of max_features.
+    n_classes_ : int or list
+        The number of classes (for single output problems), 
+        or a list containing the number of classes for each output (for multi-output problems).
+    n_features_ : int
+        The number of features when fit is performed.
+    n_outputs_ : int
+        The number of outputs when fit is performed.
+    tree_ : Tree object
+        The underlying Tree object.
+方法： 
+    apply(X[, check_input]) 
+        Returns the index of the leaf that each sample is predicted as.
+    decision_path(X[, check_input]) 
+        Return the decision path in the tree
+    fit(X, y[, sample_weight, check_input, ...])    
+        Build a decision tree classifier from the training set (X, y).
+    fit_transform(X[, y])   
+        Fit to data, then transform it.
+    get_params([deep])  
+        Get parameters for this estimator.
+    predict(X[, check_input])   
+        Predict class or regression value for X.
+    predict_log_proba(X)    
+        Predict class log-probabilities of the input samples X.
+    predict_proba(X[, check_input]) 
+        Predict class probabilities of the input samples X.
+    score(X, y[, sample_weight])    
+        Returns the mean accuracy on the given test data and labels.
+    set_params(\*\*params)  
+        Set the parameters of this estimator.
+
+***from sklearn.tree import export_graphviz***
+    一种数据可视化插件
+</code></pre>
+
+<h3>随机森林</h3>
+<p>在机器学习中，随机森林是一个包含多个决策树的分类器， 并且其输出的类别是由个别树输出的类别的众数而定。</p>
+<pre><code>from sklearn.ensemble import RandomForestClassifier
+参数：
+    n_estimators : integer, optional (default=10)
+        The number of trees in the forest.
+    criterion : string, optional (default=”gini”)
+        The function to measure the quality of a split. 
+        Supported criteria are “gini” for the Gini impurity and “entropy” for the information gain. 
+        Note: this parameter is tree-specific.
+    max_features : int, float, string or None, optional (default=”auto”)
+        The number of features to consider when looking for the best split:
+        If int, then consider max_features features at each split.
+        If float, then max_features is a percentage and int(max_features * n_features) features are considered at each split.
+        If “auto”, then max_features=sqrt(n_features).
+        If “sqrt”, then max_features=sqrt(n_features) (same as “auto”).
+        If “log2”, then max_features=log2(n_features).
+        If None, then max_features=n_features.
+        Note: the search for a split does not stop until at least one valid partition of the node samples is found, 
+        even if it requires to effectively inspect more than max_features features.
+    max_depth : integer or None, optional (default=None)
+        The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves 
+        contain less than min_samples_split samples.
+    min_samples_split : int, float, optional (default=2)
+        The minimum number of samples required to split an internal node:
+        If int, then consider min_samples_split as the minimum number.
+        If float, then min_samples_split is a percentage and ceil(min_samples_split * n_samples) are the 
+        minimum number of samples for each split.
+        Changed in version 0.18: Added float values for percentages.
+    min_samples_leaf : int, float, optional (default=1)
+        The minimum number of samples required to be at a leaf node:
+        If int, then consider min_samples_leaf as the minimum number.
+        If float, then min_samples_leaf is a percentage and ceil(min_samples_leaf * n_samples) are the minimum
+         number of samples for each node.
+        Changed in version 0.18: Added float values for percentages.
+    min_weight_fraction_leaf : float, optional (default=0.)
+        The minimum weighted fraction of the sum total of weights (of all the input samples) required to be at a leaf node. 
+        Samples have equal weight when sample_weight is not provided.
+    max_leaf_nodes : int or None, optional (default=None)
+        Grow trees with max_leaf_nodes in best-first fashion. Best nodes are defined as relative reduction in impurity. 
+        If None then unlimited number of leaf nodes.
+    min_impurity_split : float, optional (default=1e-7)
+        Threshold for early stopping in tree growth. A node will split if its impurity is above the threshold,
+         otherwise it is a leaf.
+    bootstrap : boolean, optional (default=True)
+        Whether bootstrap samples are used when building trees.
+    oob_score : bool (default=False)
+        Whether to use out-of-bag samples to estimate the generalization accuracy.
+    n_jobs : integer, optional (default=1)
+        The number of jobs to run in parallel for both fit and predict. If -1, then the number of jobs is set
+         to the number of cores.
+    random_state : int, RandomState instance or None, optional (default=None)
+        If int, random_state is the seed used by the random number generator; If RandomState instance, 
+        random_state is the random number generator; If None, the random number generator is the RandomState
+         instance used by np.random.
+    verbose : int, optional (default=0)
+        Controls the verbosity of the tree building process.
+    warm_start : bool, optional (default=False)
+        When set to True, reuse the solution of the previous call to fit and add more estimators to the 
+        ensemble, otherwise, just fit a whole new forest.
+    class_weight : dict, list of dicts, “balanced”
+属性：         
+    estimators_ : list of DecisionTreeClassifier
+        The collection of fitted sub-estimators.
+    classes_ : array of shape = [n_classes] or a list of such arrays
+        The classes labels (single output problem), or a list of arrays of class labels (multi-output problem).
+    n_classes_ : int or list
+        The number of classes (single output problem), or a list containing the number of classes for each output 
+        (multi-output problem).
+    n_features_ : int
+        The number of features when fit is performed.
+    n_outputs_ : int
+        The number of outputs when fit is performed.
+    feature_importances_ : array of shape = [n_features]
+        The feature importances (the higher, the more important the feature).
+    oob_score_ : float
+        Score of the training dataset obtained using an out-of-bag estimate.
+    oob_decision_function_ : array of shape = [n_samples, n_classes]
+        Decision function computed with out-of-bag estimate on the training set.
+        If n_estimators is small it might be possible that a data point was never left out during the bootstrap.
+        In this case, oob_decision_function_ might contain NaN.
+方法：
+    apply(X)
+        Apply trees in the forest to X, return leaf indices.
+    decision_path(X)
+        Return the decision path in the forest
+    fit(X, y[, sample_weight])  
+        Build a forest of trees from the training set (X, y).
+    fit_transform(X[, y])
+        Fit to data, then transform it.
+    get_params([deep])
+        Get parameters for this estimator.
+    predict(X)
+        Predict class for X.
+    predict_log_proba(X)
+        Predict class log-probabilities for X.
+    predict_proba(X)
+        Predict class probabilities for X.
+    score(X, y[, sample_weight])
+        Returns the mean accuracy on the given test data and labels.
+    set_params(\*\*params)
+        Set the parameters of this estimator.
+</code></pre>
+
+<h3>KNN</h3>
+<p>即K最近邻，无监督的聚类算法。</p>
+<pre><code>from sklearn.neighbors import KNeighborsClassifier
+参数：
+    n_neighbors : int, optional (default = 5)
+        默认情况下用于k_neighbors查询的邻居数。
+        Number of neighbors to use by default for k_neighbors queries.
+    weights : str or callable, optional (default = ‘uniform’)
+        用于预测的权重函数
+        weight function used in prediction. Possible values:
+        ‘uniform’ : uniform weights. All points in each neighborhood are weighted equally.
+        ‘distance’ : weight points by the inverse of their distance. in this case, closer neighbors of a query 
+        point will have a greater influence than neighbors which are further away.
+        [callable] : a user-defined function which accepts an array of distances, and returns an array of the 
+        same shape containing the weights.
+    algorithm : {‘auto’, ‘ball_tree’, ‘kd_tree’, ‘brute’}, optional
+        Algorithm used to compute the nearest neighbors:
+        ‘ball_tree’ will use BallTree
+        ‘kd_tree’ will use KDTree
+        ‘brute’ will use a brute-force search.
+        ‘auto’ will attempt to decide the most appropriate algorithm based on the values passed to fit method.
+        Note: fitting on sparse input will override the setting of this parameter, using brute force.
+    leaf_size : int, optional (default = 30)
+        Leaf size passed to BallTree or KDTree. This can affect the speed of the construction and query, 
+        as well as the memory required to store the tree. 
+        The optimal value depends on the nature of the problem.
+    metric : string or DistanceMetric object (default = ‘minkowski’)
+        #用于树的距离度量
+        the distance metric to use for the tree. The default metric is minkowski, and with p=2 is equivalent 
+        to the standard Euclidean metric. See the documentation of the DistanceMetric class for a list of available metrics.
+    p : integer, optional (default = 2)
+        #节点距离公式
+        Power parameter for the Minkowski metric. 
+        When p = 1, this is equivalent to using manhattan_distance (l1), 
+        and euclidean_distance (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.
+    metric_params : dict, optional (default = None)
+        Additional keyword arguments for the metric function.
+    n_jobs : int, optional (default = 1)
+        #CPU并行数量
+        The number of parallel jobs to run for neighbors search. If -1, then the number of jobs is set to the
+        number of CPU cores. Doesn’t affect fit method.
+属性：     
+    fit(X, y)   
+        Fit the model using X as training data and y as target values
+    get_params([deep])  
+        Get parameters for this estimator.
+    kneighbors([X, n_neighbors, return_distance])   
+        Finds the K-neighbors of a point.
+    kneighbors_graph([X, n_neighbors, mode])
+        Computes the (weighted) graph of k-Neighbors for points in X
+    predict(X)  
+        Predict the class labels for the provided data
+    predict_proba(X)    
+        Return probability estimates for the test data X.
+    score(X, y[, sample_weight])    
+        Returns the mean accuracy on the given test data and labels.
+    set_params(\*\*params)  
+        Set the parameters of this estimator.
+</code></pre>
+
+<h1>多项式回归</h1>
+<pre><code>from sklearn.preprocessing import PolynomialFeatures
+class sklearn.preprocessing.PolynomialFeatures(degree=2, interaction_only=False, include_bias=True)
+ATTR:
+    powers_ : array, shape (n_output_features, n_input_features)
+        powers_[i, j] is the exponent of the jth input in the ith output.
+    n_input_features_ : int
+        The total number of input features.
+    n_output_features_ : int
+        The total number of polynomial output features. 
+        The number of output features is computed by iterating over all suitably sized combinations of input features.
+FUNC:
+    fit(X[, y]) Compute number of output features.
+    fit_transform(X[, y])   Fit to data, then transform it.
+    get_feature_names([input_features]) Return feature names for output features
+    get_params([deep])  Get parameters for this estimator.
+    set_params(\*\*params)  Set the parameters of this estimator.
+    transform(X[, y])   Transform data to polynomial features
+</code></pre>
+
+<hr />
+<h2>4. 模型性能评估</h2>
+<pre><code>#R2(决定系数评估)
+    from sklearn.metrics import r2_score
+    sklearn.metrics.r2_score(y_true, y_pred, sample_weight=None, multioutput=None)
+
+#均方误差
+    from sklearn.metrics import mean_squared_error
+    sklearn.metrics.mean_squared_error(y_true, y_pred, sample_weight=None, multioutput='uniform_average')
+
+#添加正则化部分？？？
+    from sklearn.linear_model import Lasso
+    lasso = Lasso(alpha=0.1)
+    lasso.fit(X_train, y_train)
+    y_train_pred = lasso.predict(X_train)
+    y_test_pred = lasso.predict(X_test)
+    print(lasso.coef_)
+
+#混淆矩阵
+    from sklearn.metrics import confusion_matrix
+    真阳性（True Positive，TP）：指被分类器正确分类的正例数据
+    真阴性（True Negative，TN）：指被分类器正确分类的负例数据
+    假阳性（False Positive，FP）：被错误地标记为正例数据的负例数据
+    假阴性（False Negative，FN）：被错误地标记为负例数据的正例数据
+
+    在机器学习领域，混淆矩阵（confusion matrix），又称为可能性表格或是错误矩阵。
+    它是一种特定的矩阵用来呈现算法性能的可视化效果，通常是监督学习（非监督学习，通常用匹配矩阵：matching matrix）。
+    其每一列代表预测值，每一行代表的是实际的类别。
+    这个名字来源于它可以非常容易的表明多个类别是否有混淆（也就是一个class被预测成另一个class）。
+</code></pre>
+
+<hr />
+<h2>5. 特征选择</h2>
+<h1>L2&amp;L1正则化对比:  <img src="L1&amp;L2.jpg" alt="Alt text" /></h1>
+<p>左图L2，右图L1</p>
+<pre><code>正则化项特点：
+    L1：为截断型效应，可以把弱特征权重置0(如图中w1)，进行特征选择，但性能比L2稍差，特征较多时可用。
+    L2：为缩放效应，每个特征都有权重，但权重会较小，平滑曲线减小波动，准确度会高，但训练时间。
+方法：
+    通过L1正则化的截断性效应选择
+    子特征集选择法
+    通过随机森林对特征重要性排序
+</code></pre>
+
+<p></br></p>
+<pre><code>np.corrcoef：相关系数
+cm = np.corrcoef(df[cols].values.T)
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

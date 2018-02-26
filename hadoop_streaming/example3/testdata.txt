@@ -1,0 +1,4 @@
+    id_a, id_b, id_c, id_d 
+    id_a, id_a, id_f 
+    id_b, id_b, id_d, id_f, id_a
+    id_m, id_n

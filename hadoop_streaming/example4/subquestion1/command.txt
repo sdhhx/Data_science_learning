@@ -1,0 +1,7 @@
+hadoop fs -put ../user_session.data /SXY01-058/input 
+hadoop fs -get /SXY01-058/output ./output/
+
+hadoop jar /home/ds/hadoop/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.6.0.jar -file maps1.py -file reduces1.py -mapper maps1.py -reducer reduces1.py -input /SXY01-058/input -output /SXY01-058/output
+
+hadoop jar /home/ds/hadoop/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.6.0.jar -file maps2.py -file reduces2.py -mapper maps2.py -reducer reduces2.py -input /SXY01-058/input/ -output /SXY01-058/output
+    

@@ -1,0 +1,8 @@
+hadoop fs -ls /SXY01-058/input
+hadoop fs -rmr /SXY01-058/input
+hadoop fs -rmr /SXY01-058/output
+hadoop fs -mkdir /SXY01-058/input
+hadoop fs -put testdata.txt /SXY01-058/input 
+hadoop fs -get /SXY01-058/output ./output/
+
+hadoop jar /home/ds/hadoop/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.6.0.jar -files map.py -mapper map.py  -input /SXY01-058/input -output /SXY01-058/output 
